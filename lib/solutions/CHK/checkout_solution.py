@@ -20,7 +20,7 @@ def checkout(skus):
     # tuple[0]SKU for tuple[1]
     offer_map = {
         "A" : [(5, 200),(3, 130)],
-        "B" : (2, 45)
+        "B" : [(2, 45)],
     }
 
     # for each deal/tuple corresponding to a SKU this makes takes the form of:
@@ -57,12 +57,11 @@ def checkout(skus):
     for sku, sku_freq in sku_freq.items():
         if sku in offer_map:
             deals = offer_map[sku]
-            print(deals)
             temp_sku_freq = sku_freq
             for deal in deals:
                 group_quantity = deal[0]
                 group_cost = deal[1]
-                groups = sku_freq // group_quantity
+                groups = temp_sku_freq // group_quantity
                 temp_sku_freq -= groups * group_quantity
                 total = groups * group_cost
                 total_checkout_value += total
@@ -92,10 +91,6 @@ def test_checkout_invalid():
 #test_checkout_invalid()
 
     
-
-
-
-
 
 
 
