@@ -6,6 +6,8 @@
 from collections import defaultdict
 
 def checkout(skus):
+    # Individual default prices for each SKU
+    # All SKUs in this map are assumed to be valid and vice-versa
     price_map = {
         "A" : 50,
         "B" : 30,
@@ -13,9 +15,17 @@ def checkout(skus):
         "D" : 15
     }
 
+    # for each deal/tuple corresponding to a SKU this map takes the form of:
+    # tuple[0]SKU for tuple[1]
     offer_map = {
         "A" : (3, 130),
         "B" : (2, 45)
+    }
+
+    # for each deal/tuple corresponding to a SKU this makes takes the form of:
+    # tuple[0]SKU get tuple[1] tuple[2] free
+    offer_map_free = {
+        "E" : [(2, 1, "B")]
     }
 
     sku_freq = defaultdict(int)
@@ -56,6 +66,7 @@ def test_checkout_invalid():
 #test_checkout_invalid()
 
     
+
 
 
 
