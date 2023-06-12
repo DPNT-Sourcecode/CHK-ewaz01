@@ -100,6 +100,3 @@ test_checkout_r2_deals()
 
 
 
-
-
-
