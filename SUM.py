@@ -1,2 +1,3 @@
-def sum(a: int, b: int) -> int:
-    return a + b
+import sys
+def sum() -> int:
+    return sys.argv[0] + sys.argv[1]
