@@ -30,10 +30,29 @@ def checkout(skus):
 
     sku_freq = defaultdict(int)
 
+    # create frequency mapping logging how many times each SKU was seen in our input
+    # returns -1 if SKU not in our price_map
     for sku in skus:
         if sku not in price_map:
             return -1
         sku_freq[sku] += 1
+
+    
+    # apply savings in the case of buy x to get y free
+    for sku, deals in offer_map_free.items():
+        get_sku_freq = sku_freq[sku]
+        for deal in deals:
+            x = deal[0]
+            y = deal[1]
+            y_sku = deal[2]
+            num_free = get_sku_freq // x
+            if sku_freq[y_sku] >= num_free * y:
+                sku_freq[y_sku] -= num_free * y
+            else:
+                sku_freq[y_sku] = 0
+            get_sku_freq -= num_free * x
+
+    print(sku_freq)
 
     total_checkout_value = 0
     for sku, sku_freq in sku_freq.items():
@@ -49,6 +68,7 @@ def checkout(skus):
     
     return total_checkout_value
 
+checkout("BBBB")
 def test_checkout_empty():
     assert checkout("") == 0
 
@@ -66,6 +86,7 @@ def test_checkout_invalid():
 #test_checkout_invalid()
 
     
+
 
 
 
