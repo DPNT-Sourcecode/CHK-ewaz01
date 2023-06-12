@@ -65,7 +65,7 @@ def checkout(skus):
                 temp_sku_freq -= groups * group_quantity
                 total = groups * group_cost
                 total_checkout_value += total
-            total_checkout_value = temp_sku_freq * price_map[sku]
+            total_checkout_value += temp_sku_freq * price_map[sku]
         else:
             total_checkout_value += sku_freq * price_map[sku]
     
@@ -91,6 +91,7 @@ def test_checkout_invalid():
 #test_checkout_invalid()
 
     
+
 
 
 
