@@ -53,6 +53,7 @@ def checkout(skus):
                 sku_freq[y_sku] = 0
             get_sku_freq -= num_free * x
 
+    # calculate checkout fees with deals
     total_checkout_value = 0
     for sku, sku_freq in sku_freq.items():
         if sku in offer_map:
@@ -69,10 +70,8 @@ def checkout(skus):
         else:
             total_checkout_value += sku_freq * price_map[sku]
     
-    print(total_checkout_value)
     return total_checkout_value
 
-checkout("AAAAAAAAABEE")
 
 def test_checkout_empty():
     assert checkout("") == 0
@@ -97,6 +96,7 @@ test_checkout_invalid()
 test_checkout_r2_deals()
 
     
+
 
 
 
