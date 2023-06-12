@@ -72,25 +72,32 @@ def checkout(skus):
     print(total_checkout_value)
     return total_checkout_value
 
-checkout("AAAAAAAA")
+checkout("AAAAAAAAABEE")
 
 def test_checkout_empty():
     assert checkout("") == 0
 
-def test_checkout_valid():
+def test_checkout_valid_basic():
     assert checkout("AAAA") == 180
     assert checkout("ABCD") == 115
     assert checkout("AAAABCD") == 245
+
+def test_checkout_r2_deals():
+    assert checkout("AAAAAAAA") == 330
+    assert checkout("AAAAAAAAA") == 380
+    assert checkout("AAAAAAAAAEE") == checkout("AAAAAAAAABEE")
 
 def test_checkout_invalid():
     assert checkout("ABCZ1") == -1
 
 
-#test_checkout_empty()
-#test_checkout_valid()
-#test_checkout_invalid()
+test_checkout_empty()
+test_checkout_valid_basic()
+test_checkout_invalid()
+test_checkout_r2_deals()
 
     
+
 
 
 
