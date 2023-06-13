@@ -143,6 +143,3 @@ test_checkout_r4_deals()
 
 
 
-
-
-
