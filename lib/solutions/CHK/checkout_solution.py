@@ -74,6 +74,8 @@ def checkout(skus):
     
     return total_checkout_value
 
+print(checkout("FF"))
+
 def test_checkout_empty():
     assert checkout("") == 0
 
@@ -103,6 +105,7 @@ test_checkout_r2_deals()
 test_checkout_r3_deals()
 """
     
+
 
 
 
