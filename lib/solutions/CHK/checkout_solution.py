@@ -51,9 +51,8 @@ def checkout(skus):
             y_sku = deal[2]
             num_free = get_sku_freq // x
             if sku_freq[y_sku] >= num_free * y:
-                if sku == sku_freq[y_sku]:
-                    print ("here")
-                    if x < sku_freq:
+                if sku == y_sku:
+                    if x < sku_freq[y_sku]:
                         sku_freq[y_sku] -= num_free * y
                 else:
                     sku_freq[y_sku] -= num_free * y
@@ -111,6 +110,7 @@ test_checkout_invalid()
 test_checkout_r2_deals()
 test_checkout_r3_deals()
     
+
 
 
 
