@@ -70,18 +70,24 @@ def checkout(skus):
         sku_freq[sku] += 1
 
     # apply bundle deal
-    r5_freq = defaultdict(int)
+    #r5_freq = defaultdict(int)
+    total_checkout_value = 0
+
     total_r5_items = 0
     for sku, freq in sku_freq.items():
         if sku in r5_deal:
-            r5_freq[sku] = freq
+            #r5_freq[sku] = freq
             total_r5_items += freq
     
     total_r5_bundles = total_r5_items // 3
-    for k, v in r5_freq.items():
-        print (k, v)
+    total_checkout_value = total_r5_bundles * 45
 
-
+    counter = total_r5_bundles * 3
+    while counter > 0:
+        for sku in r5_deal:
+            while sku_freq[sku] > 0 and counter > 0:
+                sku_freq[sku] -= 1
+                counter -= 1
 
     # apply savings in the case of buy x to get y free
     for sku, deals in offer_map_free.items():
@@ -102,7 +108,6 @@ def checkout(skus):
             get_sku_freq -= num_free * x
 
     # calculate checkout fees with deals
-    total_checkout_value = 0
     for sku, sku_freq in sku_freq.items():
         if sku in offer_map:
             deals = offer_map[sku]
@@ -150,6 +155,7 @@ def test_checkout_r4_deals():
 
 def test_checkout_r5_deals():
     assert checkout("STXYZ") == 82
+    assert checkout("STXYZA") == 132
 
 test_checkout_empty()
 test_checkout_valid_basic()
@@ -157,8 +163,9 @@ test_checkout_invalid()
 test_checkout_r2_deals()
 test_checkout_r3_deals()
 test_checkout_r4_deals()
-#test_checkout_r5_deals()
+test_checkout_r5_deals()
     
+
 
 
 
