@@ -40,7 +40,8 @@ def checkout(skus):
             return -1
         sku_freq[sku] += 1
 
-    
+    print(skus)
+    print(sku_freq)
     # apply savings in the case of buy x to get y free
     for sku, deals in offer_map_free.items():
         get_sku_freq = sku_freq[sku]
@@ -51,6 +52,7 @@ def checkout(skus):
             num_free = get_sku_freq // x
             if sku_freq[y_sku] >= num_free * y:
                 if sku == sku_freq[y_sku]:
+                    print ("here")
                     if x < sku_freq:
                         sku_freq[y_sku] -= num_free * y
                 else:
@@ -59,6 +61,7 @@ def checkout(skus):
                 sku_freq[y_sku] = 0
             get_sku_freq -= num_free * x
 
+    print (sku_freq)
     # calculate checkout fees with deals
     total_checkout_value = 0
     for sku, sku_freq in sku_freq.items():
@@ -108,14 +111,6 @@ test_checkout_invalid()
 test_checkout_r2_deals()
 test_checkout_r3_deals()
     
-
-
-
-
-
-
-
-
 
 
 
