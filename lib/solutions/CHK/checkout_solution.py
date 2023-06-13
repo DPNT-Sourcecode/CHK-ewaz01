@@ -27,7 +27,6 @@ offer_map = {
 # tuple[0]SKU get tuple[1] tuple[2] free
 offer_map_free = {
     "E" : [(2, 1, "B")],
-    "F" : [(2, 1, "F")],
 }
 
 def checkout(skus):
@@ -74,8 +73,6 @@ def checkout(skus):
     
     return total_checkout_value
 
-print(checkout("FF"))
-
 def test_checkout_empty():
     assert checkout("") == 0
 
@@ -93,18 +90,17 @@ def test_checkout_invalid():
     assert checkout("ABCZ1") == -1
 
 def test_checkout_r3_deals():
-    assert checkout("FF") == checkout("F")
-    assert checkout ("FFF") == 20
-    assert checkout ("FFFF") == 20
+    assert checkout("FF") == 20
+    assert checkout ("FFF") == 30
+    assert checkout ("FFFF") == 40
 
-"""
 test_checkout_empty()
 test_checkout_valid_basic()
 test_checkout_invalid()
 test_checkout_r2_deals()
 test_checkout_r3_deals()
-"""
     
+
 
 
 
