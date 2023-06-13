@@ -51,7 +51,7 @@ def checkout(skus):
             num_free = get_sku_freq // x
             if sku_freq[y_sku] >= num_free * y:
                 if sku == sku_freq[y_sku]:
-                    if num_free + x >= get_sku_freq:
+                    if x < sku_freq:
                         sku_freq[y_sku] -= num_free * y
                 else:
                     sku_freq[y_sku] -= num_free * y
@@ -76,6 +76,7 @@ def checkout(skus):
         else:
             total_checkout_value += sku_freq * price_map[sku]
     
+    print (total_checkout_value)
     return total_checkout_value
 
 def test_checkout_empty():
@@ -107,6 +108,7 @@ test_checkout_invalid()
 test_checkout_r2_deals()
 test_checkout_r3_deals()
     
+
 
 
 
