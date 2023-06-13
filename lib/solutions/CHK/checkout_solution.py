@@ -114,5 +114,3 @@ def test_checkout_r3_deals():
 
 
 
-
-
