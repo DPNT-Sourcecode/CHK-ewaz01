@@ -18,7 +18,7 @@ price_map = {
     "H" : 10,
     "I" : 35,
     "J" : 60,
-    "K" : 80,
+    "K" : 70,
     "L" : 90,
     "M" : 15,
     "N" : 40,
@@ -26,14 +26,14 @@ price_map = {
     "P" : 50,
     "Q" : 30,
     "R" : 50,
-    "S" : 30,
+    "S" : 20,
     "T" : 20,
     "U" : 40,
     "V" : 50,
     "W" : 20,
-    "X" : 90,
-    "Y" : 10,
-    "Z" : 50
+    "X" : 17,
+    "Y" : 20,
+    "Z" : 21
 }
 
 # for each deal/tuple corresponding to a SKU this map takes the form of:
@@ -42,7 +42,7 @@ offer_map = {
     "A" : [(5, 200),(3, 130)],
     "B" : [(2, 45)],
     "H" : [(10, 80), (5, 45)],
-    "K" : [(2, 150)],
+    "K" : [(2, 120)],
     "P" : [(5, 200)],
     "Q" : [(3, 80)],
     "V" : [(3, 130), (2, 90)],
@@ -58,6 +58,8 @@ offer_map_free = {
     "U" : [(3, 1, "U")],
 }
 
+r5_deal = ["Z", "Y", "S", "T", "X"]
+
 def checkout(skus):
     sku_freq = defaultdict(int)
     # create frequency mapping logging how many times each SKU was seen in our input
@@ -66,6 +68,20 @@ def checkout(skus):
         if sku not in price_map:
             return -1
         sku_freq[sku] += 1
+
+    # apply bundle deal
+    r5_freq = defaultdict(int)
+    total_r5_items = 0
+    for sku, freq in sku_freq.items():
+        if sku in r5_deal:
+            r5_freq[sku] = freq
+            total_r5_items += freq
+    
+    total_r5_items = total_r5_items // 3
+    for k, v in r5_freq:
+        print (k, v)
+
+
 
     # apply savings in the case of buy x to get y free
     for sku, deals in offer_map_free.items():
@@ -132,13 +148,18 @@ def test_checkout_r4_deals():
     assert checkout("VVVVV") == 220
     assert checkout("NNNM") == 120
 
+def test_checkout_r5_deals():
+    assert checkout("STXYZ") == 82
+
 test_checkout_empty()
 test_checkout_valid_basic()
 test_checkout_invalid()
 test_checkout_r2_deals()
 test_checkout_r3_deals()
 test_checkout_r4_deals()
+test_checkout_r5_deals()
     
+
 
 
 
