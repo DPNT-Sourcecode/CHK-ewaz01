@@ -14,6 +14,26 @@ price_map = {
     "D" : 15,
     "E" : 40,
     "F" : 10,
+    "G" : 20,
+    "H" : 10,
+    "I" : 35,
+    "J" : 60,
+    "K" : 80,
+    "L" : 90,
+    "M" : 15,
+    "N" : 40,
+    "O" : 10,
+    "P" : 50,
+    "Q" : 30,
+    "R" : 50,
+    "S" : 30,
+    "T" : 20,
+    "U" : 40,
+    "V" : 50,
+    "W" : 20,
+    "X" : 90,
+    "Y" : 10,
+    "Z" : 50
 }
 
 # for each deal/tuple corresponding to a SKU this map takes the form of:
@@ -21,13 +41,21 @@ price_map = {
 offer_map = {
     "A" : [(5, 200),(3, 130)],
     "B" : [(2, 45)],
+    "H" : [(10, 80), (5, 45)],
+    "K" : [(2, 150)],
+    "P" : [(5, 200)],
+    "Q" : [(3, 80)],
+    "V" : [(3, 130), (2, 90)],
 }
 
 # for each deal/tuple corresponding to a SKU this makes takes the form of:
 # tuple[0]SKU get tuple[1] tuple[2] free
 offer_map_free = {
     "E" : [(2, 1, "B")],
-    "F" : [(2, 1, "F")]
+    "F" : [(2, 1, "F")],
+    "N" : [(3, 1, "M")],
+    "R" : [(3, 1, "Q")],
+    "U" : [(3, 1, "U")],
 }
 
 def checkout(skus):
@@ -49,7 +77,7 @@ def checkout(skus):
             y_sku = deal[2]
             num_free = get_sku_freq // x
             if sku == y_sku:
-                    num_free = get_sku_freq // 3
+                    num_free = get_sku_freq // (x+y)
                     sku_freq[y_sku] -= num_free
             else:
                 if sku_freq[y_sku] >= num_free * y:
@@ -108,6 +136,7 @@ test_checkout_r2_deals()
 test_checkout_r3_deals()
 """
     
+
 
 
 
