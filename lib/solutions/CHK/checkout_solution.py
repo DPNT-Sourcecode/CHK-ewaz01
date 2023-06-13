@@ -14,6 +14,7 @@ def checkout(skus):
         "C" : 20,
         "D" : 15,
         "E" : 40,
+        "F" : 10,
     }
 
     # for each deal/tuple corresponding to a SKU this map takes the form of:
@@ -26,7 +27,8 @@ def checkout(skus):
     # for each deal/tuple corresponding to a SKU this makes takes the form of:
     # tuple[0]SKU get tuple[1] tuple[2] free
     offer_map_free = {
-        "E" : [(2, 1, "B")]
+        "E" : [(2, 1, "B")],
+        "F" : [(2, 1, "F")],
     }
 
     sku_freq = defaultdict(int)
@@ -37,6 +39,8 @@ def checkout(skus):
         if sku not in price_map:
             return -1
         sku_freq[sku] += 1
+
+    print(sku_freq)
 
     
     # apply savings in the case of buy x to get y free
@@ -52,6 +56,7 @@ def checkout(skus):
             else:
                 sku_freq[y_sku] = 0
             get_sku_freq -= num_free * x
+    print(sku_freq)
 
     # calculate checkout fees with deals
     total_checkout_value = 0
@@ -70,9 +75,10 @@ def checkout(skus):
         else:
             total_checkout_value += sku_freq * price_map[sku]
     
+    print (total_checkout_value)
     return total_checkout_value
 
-
+checkout("FFFF")
 def test_checkout_empty():
     assert checkout("") == 0
 
@@ -90,12 +96,13 @@ def test_checkout_invalid():
     assert checkout("ABCZ1") == -1
 
 
-test_checkout_empty()
-test_checkout_valid_basic()
-test_checkout_invalid()
-test_checkout_r2_deals()
+#test_checkout_empty()
+#test_checkout_valid_basic()
+#test_checkout_invalid()
+#test_checkout_r2_deals()
 
     
+
 
 
 
