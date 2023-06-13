@@ -5,32 +5,32 @@
 
 from collections import defaultdict
 
+# Individual default prices for each SKU
+# All SKUs in this map are assumed to be valid and vice-versa
+price_map = {
+    "A" : 50,
+    "B" : 30,
+    "C" : 20,
+    "D" : 15,
+    "E" : 40,
+    "F" : 10,
+}
+
+# for each deal/tuple corresponding to a SKU this map takes the form of:
+# tuple[0]SKU for tuple[1]
+offer_map = {
+    "A" : [(5, 200),(3, 130)],
+    "B" : [(2, 45)],
+}
+
+# for each deal/tuple corresponding to a SKU this makes takes the form of:
+# tuple[0]SKU get tuple[1] tuple[2] free
+offer_map_free = {
+    "E" : [(2, 1, "B")],
+    "F" : [(2, 1, "F")],
+}
+
 def checkout(skus):
-    # Individual default prices for each SKU
-    # All SKUs in this map are assumed to be valid and vice-versa
-    price_map = {
-        "A" : 50,
-        "B" : 30,
-        "C" : 20,
-        "D" : 15,
-        "E" : 40,
-        "F" : 10,
-    }
-
-    # for each deal/tuple corresponding to a SKU this map takes the form of:
-    # tuple[0]SKU for tuple[1]
-    offer_map = {
-        "A" : [(5, 200),(3, 130)],
-        "B" : [(2, 45)],
-    }
-
-    # for each deal/tuple corresponding to a SKU this makes takes the form of:
-    # tuple[0]SKU get tuple[1] tuple[2] free
-    offer_map_free = {
-        "E" : [(2, 1, "B")],
-        "F" : [(2, 1, "F")],
-    }
-
     sku_freq = defaultdict(int)
 
     # create frequency mapping logging how many times each SKU was seen in our input
@@ -39,8 +39,6 @@ def checkout(skus):
         if sku not in price_map:
             return -1
         sku_freq[sku] += 1
-
-    print(sku_freq)
 
     
     # apply savings in the case of buy x to get y free
@@ -56,7 +54,6 @@ def checkout(skus):
             else:
                 sku_freq[y_sku] = 0
             get_sku_freq -= num_free * x
-    print(sku_freq)
 
     # calculate checkout fees with deals
     total_checkout_value = 0
@@ -75,10 +72,8 @@ def checkout(skus):
         else:
             total_checkout_value += sku_freq * price_map[sku]
     
-    print (total_checkout_value)
     return total_checkout_value
 
-checkout("F")
 def test_checkout_empty():
     assert checkout("") == 0
 
@@ -100,14 +95,15 @@ def test_checkout_r3_deals():
     assert checkout ("FFF") == 20
     assert checkout ("FFFF") == 20
 
-
+"""
 test_checkout_empty()
 test_checkout_valid_basic()
 test_checkout_invalid()
 test_checkout_r2_deals()
 test_checkout_r3_deals()
-
+"""
     
+
 
 
 
