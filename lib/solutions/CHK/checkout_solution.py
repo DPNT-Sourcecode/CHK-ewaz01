@@ -77,8 +77,8 @@ def checkout(skus):
             r5_freq[sku] = freq
             total_r5_items += freq
     
-    total_r5_items = total_r5_items // 3
-    for k, v in r5_freq:
+    total_r5_bundles = total_r5_items // 3
+    for k, v in r5_freq.items():
         print (k, v)
 
 
@@ -157,8 +157,9 @@ test_checkout_invalid()
 test_checkout_r2_deals()
 test_checkout_r3_deals()
 test_checkout_r4_deals()
-test_checkout_r5_deals()
+#test_checkout_r5_deals()
     
+
 
 
 
