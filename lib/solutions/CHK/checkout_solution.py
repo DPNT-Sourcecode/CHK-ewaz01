@@ -40,8 +40,6 @@ def checkout(skus):
             return -1
         sku_freq[sku] += 1
 
-    print(skus)
-    print(sku_freq)
     # apply savings in the case of buy x to get y free
     for sku, deals in offer_map_free.items():
         get_sku_freq = sku_freq[sku]
@@ -51,8 +49,8 @@ def checkout(skus):
             y_sku = deal[2]
             num_free = get_sku_freq // x
             if sku == y_sku:
-                    if x < sku_freq[y_sku]:
-                        sku_freq[y_sku] -= num_free * y
+                    num_free = get_sku_freq // 3
+                    sku_freq[y_sku] -= num_free
             else:
                 if sku_freq[y_sku] >= num_free * y:
                         sku_freq[y_sku] -= num_free * y
@@ -60,7 +58,6 @@ def checkout(skus):
                     sku_freq[y_sku] = 0
             get_sku_freq -= num_free * x
 
-    print (sku_freq)
     # calculate checkout fees with deals
     total_checkout_value = 0
     for sku, sku_freq in sku_freq.items():
@@ -78,7 +75,6 @@ def checkout(skus):
         else:
             total_checkout_value += sku_freq * price_map[sku]
     
-    print (total_checkout_value)
     return total_checkout_value
 
 def test_checkout_empty():
@@ -104,12 +100,15 @@ def test_checkout_r3_deals():
     assert checkout ("FFFF") == 30
     assert checkout ("FFFFFF") == 40
 
-##test_checkout_empty()
-##test_checkout_valid_basic()
-#test_checkout_invalid()
-#test_checkout_r2_deals()
-#test_checkout_r3_deals()
+"""
+test_checkout_empty()
+test_checkout_valid_basic()
+test_checkout_invalid()
+test_checkout_r2_deals()
+test_checkout_r3_deals()
+"""
     
+
 
 
 
